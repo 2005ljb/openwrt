@@ -52,4 +52,3 @@ static inline void ap94_pci_init(u8 *cal_data0, u8 *mac_addr0,
 #endif
 
 #endif /* _ATH79_DEV_AP9X_PCI_H */
-

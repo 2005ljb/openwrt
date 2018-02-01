@@ -959,6 +959,9 @@ ar71xx_board_detect() {
 	*"RouterBOARD 921GS-5HPacD r2")
 		name="rb-921gs-5hpacd-r2"
 		;;
+	*"RouterBOARD 922UAGS-5HPacD")
+		name="rb-922uags-5hpacd"
+		;;
 	*"RouterBOARD 941-2nD")
 		name="rb-941-2nd"
 		;;
