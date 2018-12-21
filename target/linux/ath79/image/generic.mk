@@ -136,6 +136,14 @@ define Device/comfast_cf-e110n-v2
 endef
 TARGET_DEVICES += comfast_cf-e110n-v2
 
+define Device/comfast_cf-e120a-v3
+  ATH_SOC := ar9344
+  DEVICE_TITLE := COMFAST CF-E120A v3
+  DEVICE_PACKAGES := rssileds kmod-leds-gpio swconfig -uboot-envtools
+  IMAGE_SIZE := 8000k
+endef
+TARGET_DEVICES += comfast_cf-e120a-v3
+
 define Device/dlink_dir-825-b1
   ATH_SOC := ar7161
   DEVICE_TITLE := D-LINK DIR-825 B1
