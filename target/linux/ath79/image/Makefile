@@ -73,6 +73,7 @@ include ./generic-ubnt.mk
 endif
 ifeq ($(SUBTARGET),nand)
 include ./nand.mk
+include ./nand-mikrotik.mk
 endif
 ifeq ($(SUBTARGET),tiny)
 include ./tiny.mk

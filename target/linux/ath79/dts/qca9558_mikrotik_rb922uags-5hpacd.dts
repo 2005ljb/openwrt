@@ -1,0 +1,8 @@
+/dts-v1/;
+
+#include "qca9557_mikrotik_rb92x.dtsi"
+
+/ {
+	compatible = "mikrotik,rb922uags-5hpacd";
+	model = "MikroTik RouterBOARD 922UAGS-5HPacD";
+};
