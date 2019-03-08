@@ -3,7 +3,6 @@ define Device/mikrotik
   DEVICE_PACKAGES := kmod-usb-core kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport
   BOARD_NAME := routerboard
   LOADER_TYPE := elf
-  KERNEL_NAME := vmlinux.bin.lzma
   KERNEL := kernel-bin | loader-kernel
   MIKROTIK_CHUNKSIZE :=
   IMAGE/sysupgrade.bin/squashfs :=
@@ -14,12 +13,15 @@ define Device/mikrotik-nand
   $(Device/mikrotik)
   IMAGE/sysupgrade.bin/squashfs = append-kernel | \
 	kernel2minor -s $$(MIKROTIK_CHUNKSIZE) -e -c | sysupgrade-tar kernel=$$$$@
+	IMAGE/sysupgrade.bin := sysupgrade-tar
 endef
 
 define Device/nand-64m
   $(Device/mikrotik-nand)
   MIKROTIK_CHUNKSIZE := 512
+	
 endef
+
 
 define Device/nand-large
   $(Device/mikrotik-nand)
@@ -44,5 +46,13 @@ define Device/mikrotik_rb922uags-5hpacd
   $(Device/mikrotik-nand-large-ac)
   ATH_SOC := qca9558
   DEVICE_TITLE := MikroTik RB922UAGS-5HPacD
+	DEVICE_PACKAGES := kmod-usb-core kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport
+  BOARD_NAME := routerboard
+  LOADER_TYPE := bin
+	MIKROTIK_CHUNKSIZE := 2048
+  KERNEL := kernel-bin | loader-kernel
+	IMAGE/sysupgrade.bin := sysupgrade-tar
+	IMAGE/sysupgrade.bin/squashfs = append-kernel | \
+	kernel2minor -s $$(MIKROTIK_CHUNKSIZE) -e -c | sysupgrade-tar kernel=$$$$@
 endef
 TARGET_DEVICES += mikrotik_rb922uags-5hpacd
