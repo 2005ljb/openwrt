@@ -19,14 +19,26 @@ endef
 define Device/nand-64m
   $(Device/mikrotik-nand)
   MIKROTIK_CHUNKSIZE := 512
-	
 endef
-
 
 define Device/nand-large
   $(Device/mikrotik-nand)
   MIKROTIK_CHUNKSIZE := 2048
 endef
+
+define Device/mikrotik_rb-upa-5hnd
+	$(Device/mikrotik-nand-large)
+	ATH_SOC := ar7241
+	DEVICE_TITLE := Mikrotik RouterBOARD OmniTIK UPA-5HnD
+	BOARD_NAME := routerboard
+	LOADER_TYPE := elf
+	MIKROTIK_CHUNKSIZE := 2048
+	KERNEL := kernel-bin | loader-kernel
+	IMAGE/sysupgrade.bin := sysupgrade-tar
+	IMAGE/sysupgrade.bin/squashfs = append-kernel | \
+	kernel2minor -s $$(MIKROTIK_CHUNKSIZE) -e -c | sysupgrade-tar kernel=$$$$@
+endef
+TARGET_DEVICES += mikrotik_rb-upa-5hnd
 
 define Device/nand-large-ac
   $(Device/mikrotik-nand)
