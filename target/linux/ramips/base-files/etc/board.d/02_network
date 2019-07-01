@@ -70,6 +70,7 @@ ramips_setup_interfaces()
 	nixcore,x1-8m|\
 	ohyeah,oy-0001|\
 	phicomm,k2p|\
+	phicomm,ke-2p|\
 	phicomm,psg1208|\
 	phicomm,psg1218a|\
 	planex,db-wrt01|\

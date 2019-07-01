@@ -553,6 +553,16 @@ define Device/phicomm_k2p
 endef
 TARGET_DEVICES += phicomm_k2p
 
+define Device/phicomm_ke-2p
+  MTK_SOC := mt7621
+  IMAGE_SIZE := 15744k
+  DEVICE_VENDOR := Phicomm
+  DEVICE_MODEL := KE 2P
+  SUPPORTED_DEVICES += ke-2p
+  DEVICE_PACKAGES := kmod-mt7615e wpad-basic
+endef
+TARGET_DEVICES += phicomm_ke-2p
+
 define Device/planex_vr500
   MTK_SOC := mt7621
   IMAGE_SIZE := 65216k
