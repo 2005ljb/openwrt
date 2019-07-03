@@ -7,7 +7,7 @@
 
 / {
 	compatible = "phicomm,k2p", "mediatek,mt7621-soc";
-	model = "Phicomm K2P";
+	model = "Phicomm K2P/KE2P";
 
 	aliases {
 		led-boot = &led_blue;
