@@ -679,11 +679,7 @@ TARGET_DEVICES += librerouter_librerouter-v1
 define Device/mikrotik_rb-wapg-5hact2hnd
   $(Device/rb-nor-flash-16M-ac)
   ATH_SOC := qca9556
-  DEVICE_VENDOR := MikroTik
   DEVICE_MODEL := MikroTik RouterBOARD wAP G-5HacT2HnD (wAP AC)
-	LOADER_TYPE := elf
-	KERNEL := kernel-bin | append-dtb
-	KERNEL_INITRAMFS := kernel-bin | append-dtb
 endef
 TARGET_DEVICES += mikrotik_rb-wapg-5hact2hnd
 

@@ -5,9 +5,9 @@ define Device/mikrotik
 	LOADER_TYPE := elf
 	KERNEL_NAME := vmlinux.elf
 	KERNEL_INITRAMFS_NAME := vmlinux-initramfs.elf
-	MIKROTIK_CHUNKSIZE :=
+	KERNEL := kernel-bin | append-dtb | lzma | loader-kernel
+	KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | loader-kernel
 endef
-DEVICE_VARS += MIKROTIK_CHUNKSIZE
 
 define Device/rb-nor-flash-16M
 	$(Device/mikrotik)
