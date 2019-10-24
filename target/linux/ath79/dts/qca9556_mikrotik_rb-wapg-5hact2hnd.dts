@@ -101,10 +101,25 @@
 	};
 };
 
-&eth0 {
+&wmac {
 	status = "okay";
 };
 
-&wmac {
+
+&mdio0 {
 	status = "okay";
+
+	phy4: ethernet-phy@4 {
+		reg = <4>;
+		phy-mode = "sgmii";
+	};
+};
+
+&eth0 {
+	status = "okay";
+
+	pll-data = <0x03000101 0x80001313 0x80000101>;
+
+	phy-handle = <&phy4>;
+	phy-mode = "sgmii";
 };
