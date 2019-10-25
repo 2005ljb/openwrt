@@ -35,6 +35,56 @@
 	};
 };
 
+
+
+
+
+&mdio0 {
+	status = "okay";
+
+	phy4: ethernet-phy@4 {
+		reg = <4>;
+		phy-mode = "rgmii-id";
+	};
+};
+
+&mdio1 {
+	status = "okay";
+
+	phy1: ethernet-phy@1 {
+		reg = <1>;
+		phy-mode = "sgmii";
+	};
+};
+
+&eth0 {
+	status = "okay";
+
+	phy-handle = <&phy4>;
+	phy-mode = "rgmii";
+};
+
+&eth1 {
+	status = "okay";
+
+	pll-data = <0x03000101 0x80000101 0x80001313>;
+
+	phy-handle = <&phy1>;
+	phy-mode = "sgmii";
+	
+	fixed-link {
+		speed = <1000>;
+		full-duplex;
+	};
+};
+
+
+
+
+
+
+
+
 &spi {
 	status = "okay";
 	num-cs = <1>;
@@ -56,7 +106,7 @@
 			};
 
 			partition@e000 {
-				label = "hard_config";
+				hard_config: label = "hard_config";
 				reg = <0x000e000 0x00f000>;
 				read-only;
 			};
@@ -90,36 +140,4 @@
 
 &uart {
 	status = "okay";
-};
-
-&pcie0 {
-	status = "okay";
-
-	wifi@0,0 {
-		compatible = "qcom,ath10k";
-		reg = <0 0 0 0 0>;
-	};
-};
-
-&wmac {
-	status = "okay";
-};
-
-
-&mdio0 {
-	status = "okay";
-
-	phy4: ethernet-phy@4 {
-		reg = <4>;
-		phy-mode = "sgmii";
-	};
-};
-
-&eth0 {
-	status = "okay";
-
-	pll-data = <0x03000101 0x80001313 0x80000101>;
-
-	phy-handle = <&phy4>;
-	phy-mode = "sgmii";
 };

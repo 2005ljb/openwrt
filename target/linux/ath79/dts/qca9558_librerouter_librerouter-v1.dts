@@ -191,7 +191,7 @@
 	status = "okay";
 
 	phy-mode = "sgmii";
-	pll-data = <0x03000101 0x00000101 0x00001616>;
+	pll-data = <0x03000101 0x80000101 0x80001313>;
 	mtd-mac-address = <&art 0x6>;
 
 	fixed-link {
