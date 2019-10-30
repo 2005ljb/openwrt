@@ -12,6 +12,7 @@
 
 	aliases {
 		serial0 = &uart;
+		mdio-gpio1 = &mdio2;
 	};
 
 	chosen {
@@ -34,30 +35,86 @@
 		};
 	};
 	
-	
 	mdio2: mdio {
 		compatible = "virtual,mdio-gpio";
 
 		gpios = <&gpio 12 GPIO_ACTIVE_HIGH>, /* MDC */
-			<&gpio 1 GPIO_ACTIVE_HIGH>; /* MDIO */
+			<&gpio 11 GPIO_ACTIVE_HIGH>; /* MDIO */
 		#address-cells = <1>;
 		#size-cells = <0>;
 
-		phy0: ethernet-phy@0 {
+		phy1: ethernet-phy@1 {
 			reg = <0>;
-			reset-gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+			device_type = "ethernet-phy";
+			
+			phy-mode = "sgmii";
 		};
 	};
-	
-	
 };
 
+
+&mdio0 {
+	status = "okay";
+
+	phy0: ethernet-phy@0 {
+		reg = <17>;
+		phy-mode = "rgmii-id";
+	};
+
+	switch0@1f {
+		compatible = "qca,ar8327";
+		reg = <0x1f>;
+		qca,ar8327-initvals = <
+			0x04 0x87600000 /* PORT0 PAD MODE CTRL */
+			0x0c 0x00080080 /* PORT6 PAD MODE CTRL */
+			0x10 0x81000080 /* POWER_ON_STRIP */
+
+			0x7c 0x0000007e /* PORT0_STATUS */
+			0x94 0x0000007e /* PORT6 STATUS */
+			>;
+	};
+};
+
+&mdio1 {
+	status = "okay";
+	compatible = "virtual,mdio-gpio";
+
+	phy2: ethernet-phy@2 {
+		reg = <2>;
+		phy-mode = "sgmii";
+	};
+};
+
+
 &eth0 {
+	status = "disabled";
+};
+
+&eth1 {
 	status = "okay";
 
 	pll-data = <0x03000101 0x80000101 0x80001313>;
-	phy-handle = <&phy0>;
-	phy-mode = "sgmii";
+	phy-handle = <&phy1>;
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&gpio {
+	status = "okay";
 };
 
 
@@ -88,32 +145,32 @@
 
 			partition@e000 {
 				hard_config: label = "hard_config";
-				reg = <0x000e000 0x00f000>;
+				reg = <0x000e000 0x001000>;
 				read-only;
 			};
 
 			partition@f000 {
 				label = "bios";
-				reg = <0x000f000 0x010000>;
+				reg = <0x000f000 0x001000>;
 				read-only;
 			};
 
 			partition@10000 {
 				label = "routerboot2";
-				reg = <0x010000 0x01f000>;
+				reg = <0x010000 0x00f000>;
 				read-only;
 			};
 
 			partition@1f000 {
 				label = "soft_config";
-				reg = <0x001f000 0x020000>;
+				reg = <0x001f000 0x001000>;
 				read-only;
 			};
 
 			partition@20000 {
 				compatible = "denx,uimage";
 				label = "firmware";
-				reg = <0x020000 0x1000000>;
+				reg = <0x020000 0xfe0000>;
 			};
 		};
 	};
