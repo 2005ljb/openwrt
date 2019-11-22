@@ -679,8 +679,8 @@ TARGET_DEVICES += librerouter_librerouter-v1
 define Device/mikrotik_rb-wapg-5hact2hnd
   $(Device/rb-nor-flash-16M-ac)
   ATH_SOC := qca9556
-  DEVICE_PACKAGES := ath10k-firmware-qca988x-ct
   DEVICE_MODEL := RouterBOARD wAP G-5HacT2HnD (wAP AC)
+  DEVICE_PACKAGES += kmod-ath10k-ct ath10k-firmware-qca988x-ct
   SUPPORTED_DEVICES += rb-wapg-5hact2hnd mikrotik_rb-wapg-5hact2hnd
 endef
 TARGET_DEVICES += mikrotik_rb-wapg-5hact2hnd
