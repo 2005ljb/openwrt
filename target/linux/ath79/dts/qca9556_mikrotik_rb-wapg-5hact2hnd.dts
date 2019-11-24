@@ -52,7 +52,6 @@
 	};
 };
 
-
 &mdio0 {
 	status = "okay";
 
@@ -85,7 +84,6 @@
 	};
 };
 
-
 &eth0 {
 	status = "disabled";
 };
@@ -100,30 +98,9 @@
 
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 &gpio {
 	status = "okay";
 };
-
-
-
-
-
-
 
 &spi {
 	status = "okay";
@@ -183,7 +160,6 @@
 
 &wmac {
 	status = "okay";
-	qca,no-eeprom;
 };
 
 &pcie0 {

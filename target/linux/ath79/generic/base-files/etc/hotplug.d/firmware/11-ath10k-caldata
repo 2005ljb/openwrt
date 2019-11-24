@@ -83,6 +83,9 @@ case "$FIRMWARE" in
 		caldata_extract "radiocfg" 0x5000 0x844
 		ath10k_patch_mac $(mtd_get_mac_ascii devdata wlan5mac)
 		;;
+	rb-wapg-5hact2hnd)
+		ath10kcal_from_file "/sys/firmware/routerboot/ext_wlan_data" 0x5000 0x844
+		;;
 	tplink,archer-a7-v5|\
 	tplink,archer-c2-v3|\
 	tplink,archer-c7-v4|\
