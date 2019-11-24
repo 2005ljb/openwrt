@@ -5,6 +5,7 @@ define Device/mikrotik
 	LOADER_TYPE := elf
 	KERNEL := kernel-bin | append-dtb | lzma | loader-kernel
 	KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | loader-kernel
+	FEATURES += minor
 endef
 
 define Device/rb-nor-flash-16M

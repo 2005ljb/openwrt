@@ -167,7 +167,7 @@
 			};
 
 			partition@20000 {
-				compatible = "denx,uimage";
+				compatible = "mikrotik,minor";
 				label = "firmware";
 				reg = <0x020000 0xfe0000>;
 			};
@@ -181,13 +181,11 @@
 
 &wmac {
 	status = "okay";
-
 	qca,no-eeprom;
 };
 
 &pcie0 {
 	status = "okay";
-
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
 		reg = <0 0 0 0 0>;
