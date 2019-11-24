@@ -145,8 +145,8 @@
 				read-only;
 			};
 
-			partition@e000 {
-				hard_config: label = "hard_config";
+			hard_config: partition@e000 {
+				label = "hard_config";
 				reg = <0x000e000 0x001000>;
 				read-only;
 			};
