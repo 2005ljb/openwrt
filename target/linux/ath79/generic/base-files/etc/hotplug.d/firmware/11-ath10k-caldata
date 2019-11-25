@@ -4,6 +4,7 @@
 
 . /lib/functions/caldata.sh
 . /lib/functions/k2t.sh
+. /lib/functions/mikrotik.sh
 
 board=$(board_name)
 
@@ -64,7 +65,8 @@ case "$FIRMWARE" in
 		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_binary art 0x0) +2)
 		;;
 	mikrotik,rb-wapg-5hact2hnd)
-		ath10kcal_from_file "/sys/firmware/routerboot/ext_wlan_data" 0x5000 0x844
+		mikrotik_caldata_extract "hard_config" 0x0 0x844
+		ath10kcal_from_file "/lib/firmware/erd.bin" 0x5000 0x844
 		;;
 	nec,wg800hp)
 		caldata_extract "art" 0x5000 0x844
@@ -82,9 +84,6 @@ case "$FIRMWARE" in
 	qihoo,c301)
 		caldata_extract "radiocfg" 0x5000 0x844
 		ath10k_patch_mac $(mtd_get_mac_ascii devdata wlan5mac)
-		;;
-	rb-wapg-5hact2hnd)
-		ath10kcal_from_file "/sys/firmware/routerboot/ext_wlan_data" 0x5000 0x844
 		;;
 	tplink,archer-a7-v5|\
 	tplink,archer-c2-v3|\

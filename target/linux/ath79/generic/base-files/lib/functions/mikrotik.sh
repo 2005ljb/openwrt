@@ -13,7 +13,7 @@ mikrotik_caldata_extract() {
 	mtd=$(find_mtd_chardev $part)
 	[ -n "$mtd" ] || caldata_die "no mtd device found for partition $part"
 
-	#rbextract -e $mtd /lib/firmware/erd.bin
+	rbextract -e $mtd /lib/firmware/erd.bin
 
 	#dd if=/lib/firmware/silverchis-test-caldata.bin iflag=skip_bytes bs=$count skip=$offset count=1 2>/dev/null || \
 	#	caldata_die "failed to extract calibration data from $mtd"
