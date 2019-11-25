@@ -333,7 +333,54 @@ __rb_get_wlan_data(void)
 			goto err_free_rle_out;
 		}
 	}
+	if (magic == RB_MAGIC_ERD) {
+		if (tag_len > RB_ART_SIZE) {
+			printf("Calibration data too large\n");
+			goto err_free_lzo_in;
+		}
 
+		printf("Looking for ERD data in decompressed output\n");
+		erd_magic = 0;
+		for (erd_offset = 0; erd_offset < tag_len; erd_offset++) {
+			erd_magic = get_u32(tag + erd_offset);
+			if (erd_magic == RB_MAGIC_ERD)
+				break;
+		}
+		if (erd_magic != RB_MAGIC_ERD) {
+			printf("no ERD data found\n");
+			goto err_free_lzo_out;
+		}
+		printf("Found ERD magic at offset %d\n", erd_offset);
+
+		err = routerboot_find_tag(tag + erd_offset,
+					  tag_len - erd_offset,
+					  0x1, &buf_lzo_in, &erd_tag_len);
+		if (err) {
+			printf("No ERD chunk found\n");
+			goto err_free_lzo_out;
+		}
+
+		printf("Decompressing with LZO\n");
+		lzo_out_len = RB_ART_SIZE;
+		err = lzo1x_decompress_safe(buf_lzo_in, tag_len,
+					    buf_lzo_out, &lzo_out_len, NULL);
+		/* For some reason, I get this "input not consumed" error
+		 * even though the output is correct, so ignore it. */
+		if (err && err != LZO_E_INPUT_NOT_CONSUMED) {
+			printf("unable to decompress calibration data: %d\n",
+			       err);
+			goto err_free_lzo_out;
+		}
+
+		// printf("Decompress ERD data with RLE\n");
+		// err = rle_decode(buf_lzo_out, lzo_out_len, buf_rle_out, RB_ART_SIZE,
+		// 		 NULL, NULL);
+		// if (err) {
+		// 	printf("unable to decode ERD data\n");
+		// 	goto err_free_rle_out;
+		// }
+		buf_rle_out = buf_lzo_out;
+	}
 	return buf_rle_out;
 
 err_free_rle_out:

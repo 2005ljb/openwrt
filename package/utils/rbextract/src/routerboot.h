@@ -191,6 +191,8 @@ uint8_t lzo_prefix[] = {
     0xf3, 0x2d, 0x00, 0x00
 };
 
+uint8_t no_lzo_prefix[] = {};
+
 uint8_t	*rb_hardconfig;
 long    rb_hardconfig_len;
 
