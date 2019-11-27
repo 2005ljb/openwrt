@@ -27,6 +27,7 @@ ath79_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"0@eth1" "1:lan" "2:lan" "3:lan" "4:lan"
 		;;
+	mikrotik,rb-wapg-5hact2hnd|\
 	pqi,air-pen|\
 	tplink,tl-mr10u|\
 	tplink,tl-mr3020-v1|\
