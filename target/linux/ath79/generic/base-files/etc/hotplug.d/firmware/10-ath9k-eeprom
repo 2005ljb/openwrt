@@ -41,7 +41,8 @@ case "$FIRMWARE" in
 		ath9k_patch_mac $(mtd_get_mac_ascii u-boot-env ethaddr)
 		;;
 	mikrotik,rb-wapg-5hact2hnd)
-		mikrotik_caldata_extract "hard_config" 0x0 0x440
+		mikrotik_caldata_extract "hard_config" 0x1000 0x440 $FIRMWARE
+		ath9k_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) +2)
 		;;
 	nec,wg800hp)
 		caldata_extract "art" 0x1000 0x440

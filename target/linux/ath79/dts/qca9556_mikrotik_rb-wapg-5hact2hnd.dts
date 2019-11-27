@@ -160,6 +160,8 @@
 
 &wmac {
 	status = "okay";
+
+	qca,no-eeprom;
 };
 
 &pcie0 {
