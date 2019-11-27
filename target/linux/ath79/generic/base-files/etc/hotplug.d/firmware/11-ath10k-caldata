@@ -65,8 +65,7 @@ case "$FIRMWARE" in
 		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_binary art 0x0) +2)
 		;;
 	mikrotik,rb-wapg-5hact2hnd)
-		mikrotik_caldata_extract "hard_config" 0x0 0x844
-		ath10kcal_from_file "/lib/firmware/erd.bin" 0x5000 0x844
+		mikrotik_caldata_extract "hard_config" 0x5000 0x844 $FIRMWARE
 		;;
 	nec,wg800hp)
 		caldata_extract "art" 0x5000 0x844
