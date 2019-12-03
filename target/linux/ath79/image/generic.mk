@@ -256,6 +256,7 @@ define Device/comfast_cf-e120a-v3
   DEVICE_VARIANT := v3
   DEVICE_PACKAGES := rssileds kmod-leds-gpio -uboot-envtools
   IMAGE_SIZE := 8000k
+  SUPPORTED_DEVICES += cf-e120av3
 endef
 TARGET_DEVICES += comfast_cf-e120a-v3
 
